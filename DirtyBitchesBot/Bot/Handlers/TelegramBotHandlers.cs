@@ -1,4 +1,4 @@
-﻿using DirtyBitchesBot.Bot.Commands.Base;
+﻿using DirtyBitchesBot.Commands.Base;
 using System.Reflection;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
@@ -45,7 +45,7 @@ namespace DirtyBitchesBot.Bot.Handlers
         public void AddCommands(Assembly assembly)
         {
             var commandsTypes = assembly.GetTypes()
-                                        .Where(type => type.Namespace == "DirtyBitchesBot.Bot.Commands" && !type.IsNested)
+                                        .Where(type => type.Namespace == "DirtyBitchesBot.Commands" && !type.IsNested)
                                         .ToList();
 
             commandsTypes.ForEach(type => _commands.Add((Command?)Activator.CreateInstance(type)));

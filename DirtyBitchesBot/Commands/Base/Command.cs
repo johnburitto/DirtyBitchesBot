@@ -1,7 +1,7 @@
 ﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace DirtyBitchesBot.Bot.Commands.Base
+namespace DirtyBitchesBot.Commands.Base
 {
     public abstract class Command
     {
@@ -20,6 +20,6 @@ namespace DirtyBitchesBot.Bot.Commands.Base
         public virtual bool CanBeExecuted(string message)
         {
             return Names.Any(name => message.ToLower().Contains(name.ToLower()));
-        } 
+        }
     }
 }

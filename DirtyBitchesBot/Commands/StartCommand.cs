@@ -1,8 +1,9 @@
-﻿using DirtyBitchesBot.Bot.Commands.Base;
+﻿using DirtyBitchesBot.Commands.Base;
+using DirtyBitchesBot.Utilities;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace DirtyBitchesBot.Bot.Commands
+namespace DirtyBitchesBot.Commands
 {
     public class StartCommand : MessageCommand
     {
@@ -10,7 +11,7 @@ namespace DirtyBitchesBot.Bot.Commands
 
         public override async Task ExetureAsync(ITelegramBotClient client, Message? message)
         {
-            await client.SendTextMessageAsync(message!.Chat.Id, "Hello World!!!");
+            await client.SendTextMessageAsync(message!.Chat.Id, "Привіт 😊", replyMarkup: Keyboards.MainKeyboard);
         }
     }
 }
