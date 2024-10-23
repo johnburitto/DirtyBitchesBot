@@ -20,9 +20,19 @@ namespace DirtyBitchesBot.HttpInfrastructure.Extensions
             client.Client.DefaultRequestHeaders.Remove("floor");
             client.Client.DefaultRequestHeaders.Add("floor", floor);
 
-            var response = await client.Client.GetAsync($"laundry-queue/available?date={date:yyyy-MM-dd}");
+            var response = await client.Client.GetAsync($"/laundry-queue/available?date={date:yyyy-MM-dd}");
 
             return JsonConvert.DeserializeObject<List<string>>(await response.Content.ReadAsStringAsync());
+        }
+        
+        public static async Task<List<UserRecord>?> GetUserRecordsAsync(this RequestClient client, long telegramId, string? floor = "")
+        {
+            client.Client.DefaultRequestHeaders.Remove("floor");
+            client.Client.DefaultRequestHeaders.Add("floor", floor);
+
+            var response = await client.Client.GetAsync($"/laundry-queue/account?telegramId={telegramId}");
+
+            return JsonConvert.DeserializeObject<List<UserRecord>>(await response.Content.ReadAsStringAsync());
         }
     }
 }
