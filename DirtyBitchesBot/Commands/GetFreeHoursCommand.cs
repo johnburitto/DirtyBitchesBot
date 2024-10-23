@@ -25,21 +25,21 @@ namespace DirtyBitchesBot.Commands
                     StateName = "fh_get_floor"
                 };
                 await client.SendTextMessageAsync(message.From.Id, "Оберіть поверх:", parseMode: ParseMode.MarkdownV2, replyMarkup: Keyboards.FloorsKeyboard);
-                await StateMachine.SetStateAsync($"{message!.From!.Id}_state", state);
+                await StateMachine.SetStateAsync($"{message.From.Id}_state", state);
             }
-            else if (state?.StateName == "fh_get_floor")
+            else if (state.StateName == "fh_get_floor")
             {
                 state.StateName = "fh_get_date";
                 state.StateObject!.Floor = message.Text;
                 await client.SendTextMessageAsync(message.From.Id, "Оберіть дату:", parseMode: ParseMode.MarkdownV2, replyMarkup: Keyboards.DatesKeyboard);
-                await StateMachine.SetStateAsync($"{message!.From!.Id}_state", state);
+                await StateMachine.SetStateAsync($"{message.From.Id}_state", state);
             }
-            else if (state?.StateName == "fh_get_date")
+            else if (state.StateName == "fh_get_date")
             {
-                var hours = await RequestClient.Instance.GetFreeHoursAsync(DateTime.Parse(message.Text ?? ""), state?.StateObject?.Floor as string);
+                var hours = await RequestClient.Instance.GetFreeHoursAsync(DateTime.Parse(message.Text ?? ""), state.StateObject?.Floor as string);
 
                 await client.SendTextMessageAsync(message.From.Id, hours!.ToFreeHoursList(), parseMode: ParseMode.MarkdownV2, replyMarkup: Keyboards.MainKeyboard);
-                await StateMachine.RemoveStateAsync($"{message!.From!.Id}_state");
+                await StateMachine.RemoveStateAsync($"{message.From.Id}_state");
             }
         }
     }

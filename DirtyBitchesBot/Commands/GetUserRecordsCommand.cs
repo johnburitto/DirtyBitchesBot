@@ -10,9 +10,9 @@ using Telegram.Bot.Types.Enums;
 
 namespace DirtyBitchesBot.Commands
 {
-    public class GetQueueCommand : MessageCommand
+    public class GetUserRecordsCommand : MessageCommand
     {
-        protected override List<string> Names { get; set; } = ["/queue", "Черга", "queue_get_floor", "queue_get_date"];
+        protected override List<string> Names { get; set; } = ["Мої записи", "ur_get_floor"];
 
         public override async Task ExetureAsync(ITelegramBotClient client, Message? message)
         {
@@ -22,23 +22,16 @@ namespace DirtyBitchesBot.Commands
             {
                 state = new State
                 {
-                    StateName = "queue_get_floor"
+                    StateName = "ur_get_floor"
                 };
                 await client.SendTextMessageAsync(message.From.Id, "Оберіть поверх:", parseMode: ParseMode.MarkdownV2, replyMarkup: Keyboards.FloorsKeyboard);
                 await StateMachine.SetStateAsync($"{message.From.Id}_state", state);
             }
-            else if (state.StateName == "queue_get_floor")
+            else if (state.StateName == "ur_get_floor")
             {
-                state.StateName = "queue_get_date";
-                state.StateObject!.Floor = message.Text;
-                await client.SendTextMessageAsync(message.From.Id, "Оберіть дату:", parseMode: ParseMode.MarkdownV2, replyMarkup: Keyboards.DatesKeyboard);
-                await StateMachine.SetStateAsync($"{message.From.Id}_state", state);
-            }
-            else if (state.StateName == "queue_get_date")
-            {
-                var queue = await RequestClient.Instance.GetLaundryQueueAsync(DateTime.Parse(message.Text ?? ""), state.StateObject?.Floor as string);
+                var records = await RequestClient.Instance.GetUserRecordsAsync(message.From.Id, message.Text);
 
-                await client.SendTextMessageAsync(message.From.Id, queue!.ToQueueList(message.From.Id), parseMode: ParseMode.MarkdownV2, replyMarkup: Keyboards.MainKeyboard);
+                await client.SendTextMessageAsync(message.From.Id, records!.ToUserRecordsList(), parseMode: ParseMode.MarkdownV2, replyMarkup: Keyboards.MainKeyboard);
                 await StateMachine.RemoveStateAsync($"{message.From.Id}_state");
             }
         }
