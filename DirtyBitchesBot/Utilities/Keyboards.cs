@@ -6,7 +6,7 @@ namespace DirtyBitchesBot.Utilities
     {
         public static ReplyKeyboardMarkup MainKeyboard => new([
             new KeyboardButton[] { "Вільні години", "Черга", "Записатися" },
-            new KeyboardButton[] { "Звільнити черну", "Зсунути черну" },
+            new KeyboardButton[] { "Звільнити чергу", "Зсунути чергу" },
             new KeyboardButton[] { "Мої записи" },
         ])
         {

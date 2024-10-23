@@ -20,7 +20,7 @@ namespace DirtyBitchesBot.Extentions
 
         public static string ToUserRecordsList(this List<UserRecord> records)
         {
-            return string.Join("\n", records.Select((record, index) => $"Запис \\#{index + 1} 🧼🫧 {record}"));
+            return $"*Мої записи:*\n\n{string.Join("\n", records.Select((record, index) => $"Запис \\#{index + 1} 🧼🫧 {record}"))}";
         }
     }
 }
