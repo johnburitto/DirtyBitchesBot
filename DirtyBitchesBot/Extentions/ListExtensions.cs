@@ -1,4 +1,5 @@
 ﻿using DirtyBitchesBot.Entities;
+using System;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace DirtyBitchesBot.Extentions
@@ -15,12 +16,26 @@ namespace DirtyBitchesBot.Extentions
             return new(hours.Select((hour, index) => new { Hour = hour, Index = index })
                              .GroupBy(obj => obj.Index / 5)
                              .Select(segment => segment.Select(obj => new KeyboardButton(obj.Hour)))
-                             .ToList());
+                             .ToList())
+            {
+                ResizeKeyboard = true
+            };
         }
 
         public static string ToUserRecordsList(this List<UserRecord> records)
         {
             return $"*Мої записи:*\n\n{string.Join("\n", records.Select((record, index) => $"Запис \\#{index + 1} 🧼🫧 {record}"))}";
+        }
+
+        public static ReplyKeyboardMarkup ToUserRecordsKeyboard(this List<UserRecord> records)
+        {
+            return new(records.Select((record, index) => new { Record = record, Index = index })
+                              .GroupBy(obj => obj.Index / 5)
+                              .Select(segment => segment.Select(obj => new KeyboardButton($"Запис #{obj.Index + 1} 🧼🫧")))
+                              .ToList())
+            {
+                ResizeKeyboard = true
+            };
         }
     }
 }

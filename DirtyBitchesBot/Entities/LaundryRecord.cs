@@ -2,7 +2,7 @@
 {
     public class LaundryRecord
     {
-        public Guid Id { get; set; }
+        public Guid Uuid { get; set; }
         public long TelegramId { get; set; }
         public string? UserName { get; set; }
         public string? FullName { get; set; }

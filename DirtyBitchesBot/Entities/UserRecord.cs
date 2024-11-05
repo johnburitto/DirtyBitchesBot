@@ -2,6 +2,7 @@
 {
     public class UserRecord
     {
+        public Guid Uuid { get; set; }
         public TimeSpan Time { get; set; }
         public DateTime Date { get; set; }
         public string? Room { get; set; }

@@ -8,17 +8,26 @@ namespace DirtyBitchesBot.Commands.Base
     {
         public override async Task<bool> TryExecuteAsync(ITelegramBotClient client, Message? message)
         {
-            var state = await StateMachine.GetStateAsync($"{message.From.Id}_state");
-            var data = state == null ? message.Text : state.StateName;
-
-            if (CanBeExecuted(data ?? ""))
+            try
             {
-                await ExetureAsync(client, message);
+                var state = await StateMachine.GetStateAsync($"{message!.From!.Id}_state");
+                var data = state == null ? message.Text : state.StateName;
 
-                return true;
+                if (CanBeExecuted(data ?? ""))
+                {
+                    await ExetureAsync(client, message);
+
+                    return true;
+                }
+
+                return false;
             }
+            catch (Exception e)
+            {
+                await client.SendTextMessageAsync(message!.From!.Id, e.Message);
 
-            return false;
+                return false;
+            }
         }
     }
 }

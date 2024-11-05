@@ -17,7 +17,7 @@ namespace DirtyBitchesBot.Commands
 
         public override async Task ExetureAsync(ITelegramBotClient client, Message? message)
         {
-            var state = await StateMachine.GetStateAsync($"{message.From.Id}_state");
+            var state = await StateMachine.GetStateAsync($"{message!.From!.Id}_state");
 
             if (state == null)
             {
