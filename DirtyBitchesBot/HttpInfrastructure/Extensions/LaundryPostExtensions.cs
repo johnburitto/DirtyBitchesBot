@@ -8,11 +8,8 @@ namespace DirtyBitchesBot.HttpInfrastructure.Extensions
 {
     public static class LaundryPostExtensions
     {
-        public static async Task<LaundryRecordAddResponse?> AddRecordAsync(this RequestClient client, LaundryRecordCreateDto? dto, string? floor = "")
+        public static async Task<LaundryRecordAddResponse?> AddRecordAsync(this RequestClient client, LaundryRecordCreateDto? dto)
         {
-            client.Client.DefaultRequestHeaders.Remove("floor");
-            client.Client.DefaultRequestHeaders.Add("floor", floor);
-
             var dtoString = JsonConvert.SerializeObject(dto, new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
@@ -41,11 +38,8 @@ namespace DirtyBitchesBot.HttpInfrastructure.Extensions
                 : JsonConvert.DeserializeObject<LaundryRecordAddResponse>(await response.Content.ReadAsStringAsync());
         }
 
-        public static async Task<LaundryRecordAddResponse?> UpdateRecordAsync(this RequestClient client, LaundryRecordUpdateDto? dto, string? floor = "")
+        public static async Task<LaundryRecordAddResponse?> UpdateRecordAsync(this RequestClient client, LaundryRecordUpdateDto? dto)
         {
-            client.Client.DefaultRequestHeaders.Remove("floor");
-            client.Client.DefaultRequestHeaders.Add("floor", floor);
-
             var dtoString = JsonConvert.SerializeObject(dto, new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()

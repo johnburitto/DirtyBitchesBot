@@ -62,7 +62,7 @@ namespace DirtyBitchesBot.Commands
             {
                 state.StateObject.Room = message.Text;
 
-                var response = await RequestClient.Instance.AddRecordAsync(state.StateObject as LaundryRecordCreateDto, state.StateObject.Floor as string);
+                var response = await RequestClient.Instance.AddRecordAsync(state.StateObject as LaundryRecordCreateDto);
 
                 if (response == null)
                 {

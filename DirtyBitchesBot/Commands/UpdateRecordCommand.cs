@@ -68,7 +68,7 @@ namespace DirtyBitchesBot.Commands
             {
                 state.StateObject.Time = TimeSpan.Parse(message.Text ?? "");
 
-                var response = await RequestClient.Instance.UpdateRecordAsync(state.StateObject as LaundryRecordUpdateDto, state.StateObject.Floor as string);
+                var response = await RequestClient.Instance.UpdateRecordAsync(state.StateObject as LaundryRecordUpdateDto);
 
                 if (response == null)
                 {
