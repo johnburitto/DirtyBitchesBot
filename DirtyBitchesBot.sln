@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirtyBitchesBot", "DirtyBitchesBot\DirtyBitchesBot.csproj", "{E78EF44D-03E9-441A-8E73-D6C56998858F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirtyBitchesBot", "DirtyBitchesBot\DirtyBitchesBot.csproj", "{E78EF44D-03E9-441A-8E73-D6C56998858F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{EAD604B2-5718-47C7-BFA4-49A17B293AFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{E78EF44D-03E9-441A-8E73-D6C56998858F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E78EF44D-03E9-441A-8E73-D6C56998858F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E78EF44D-03E9-441A-8E73-D6C56998858F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAD604B2-5718-47C7-BFA4-49A17B293AFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAD604B2-5718-47C7-BFA4-49A17B293AFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAD604B2-5718-47C7-BFA4-49A17B293AFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAD604B2-5718-47C7-BFA4-49A17B293AFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
